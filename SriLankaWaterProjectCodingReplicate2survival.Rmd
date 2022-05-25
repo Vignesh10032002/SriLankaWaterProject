@@ -15,12 +15,12 @@ library(broom)
 ```
 
 ```{r data_cleaning, eval = FALSE}
-Fish_Data_ForR_Excel_Modified_Replicate1 <- subset(Fish_Data_ForR_Excel_Modified_Replicate1,`48_surv`!= 0)
+Fish_Data_ForR_ExcelModified_Replicate2 <- subset(Fish_Data_ForR_ExcelModified_Replicate2,`48_surv`!= 0)
 ```
 
 ```{r mutating-variable, eval = FALSE}
-Fish_Data_ForR_Excel_Modified_Replicate1 %>%
-  mutate(Fish_Data_ForR_Excel_Modified_Replicate1, percentagesurvival = `96_surv` / Initial_total) %>%
+Fish_Data_ForR_ExcelModified_Replicate2 %>%
+  mutate(Fish_Data_ForR_ExcelModified_Replicate2, percentagesurvival = `96_surv` / Initial_total) %>%
   ggplot(aes(x = Glyphosate, y = percentagesurvival)) +
   geom_point() +
   geom_smooth(method=lm, se=FALSE) +
@@ -28,16 +28,16 @@ Fish_Data_ForR_Excel_Modified_Replicate1 %>%
 ```
 
 ```{r getting_numerical_outputs_model, eval = FALSE}
-Fish_Data_ForR_Excel_Modified_Replicate_New  <- Fish_Data_ForR_Excel_Modified_Replicate1 %>%
+Fish_Data_ForR_Excel_Modified_Replicate_New2  <- Fish_Data_ForR_ExcelModified_Replicate2 %>%
   mutate(percentagesurvival = `96_surv` / Initial_total)
-model_replicate_1_survival <- lm(percentagesurvival ~ Glyphosate, data = Fish_Data_ForR_Excel_Modified_Replicate_New)
-tidy(model_replicate_1_survival)
+model_replicate_2_survival <- lm(percentagesurvival ~ Glyphosate, data = Fish_Data_ForR_Excel_Modified_Replicate_New2)
+tidy(model_replicate_2_survival)
 ```
 
-$$ {\widehat{Replicate1Survival}} = 0.969 - 0.00647~Glyphosate$$
+$$ {\widehat{Replicate1Survival}} = 0.987 - 0.000799~Glyphosate$$
 
 ```{r bar-plots_with_data, eval = FALSE}
-Fish_Data_ForR_Excel_Modified_Replicate1 %>%
+Fish_Data_ForR_Excel_Modified_Replicate_New2 %>%
   group_by(`Sample Type`) %>%
   summarize(mean_percentage_survival = mean(percentagesurvival), sd = sd(percentagesurvival)) %>% 
   ggplot(aes(x = `Sample Type`, y = mean_percentage_survival)) +
