@@ -57,3 +57,8 @@ Deformities_ForR_Replication_1_New %>%
 #doesn't work as data points insufficient (https://stackoverflow.com/questions/60549030/geom-violin-using-the-weight-aesthetic-unexpectedly-drop-levels)
 ```
 
+```{r try_something_new, eval = FALSE}
+ggplot(data = Deformities_ForR_Replication_1_New, mapping = aes(x = Glyphosate, y = percentage_deformed)) +
+ geom_point() +
+ facet_wrap(~ `Sample ID`)
+```
