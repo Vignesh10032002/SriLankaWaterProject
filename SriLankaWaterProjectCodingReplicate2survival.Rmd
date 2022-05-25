@@ -1,6 +1,6 @@
 ---
 title: "Sri Lankan Water Project"
-subtitle: "Survival wrt Replication 1"
+subtitle: "Survival wrt Replication 2"
 author: "Vignesh Pirapaharan"
 date: "May 25, 2022"
 editor_options: 
