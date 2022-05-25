@@ -1,11 +1,33 @@
 ---
-title: "Lab 01"
-subtitle: "due Sun, Jan 24 11:59 PM"
+title: "Sri Lankan Water Project"
+subtitle: "Survival wrt Replication 1"
 author: "Vignesh Pirapaharan"
-date: "January 22, 2021"
+date: "May 25, 2022"
 editor_options: 
   chunk_output_type: console
 output:
   pdf_document: default
 ---
 
+```{r load-packages}
+library(tidyverse)
+library(broom)
+```
+
+```{r mutating-variable}
+Fish_Data_ForR_Excel_Modified_Replicate1 %>%
+  mutate(Fish_Data_ForR_Excel_Modified_Replicate1, percentagesurvival = `96_surv` / Initial_total) %>%
+  ggplot(aes(x = Glyphosate, y = percentagesurvival)) +
+  geom_point() +
+  geom_smooth(method=lm, se=FALSE) +
+  labs (x = "Glyphosate concentration", y = "Percentage Survival") 
+```
+
+```{r getting_numerical_outputs}
+Fish_Data_ForR_Excel_Modified_Replicate2 <- Fish_Data_ForR_Excel_Modified_Replicate1 %>%
+  mutate(percentagesurvival = `96_surv` / Initial_total)
+model_replicate_1_survival <- lm(percentagesurvival ~ Glyphosate, data = Fish_Data_ForR_Excel_Modified_Replicate2)
+tidy(model_replicate_1_survival)
+```
+
+$$ {\widehat{Replicate1Survival}} = 0.969 - 0.00647~Glyphosate$$
