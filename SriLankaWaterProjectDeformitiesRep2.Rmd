@@ -1,6 +1,6 @@
 ---
 title: "Sri Lankan Water Project"
-subtitle: "Deformities_Replication_1"
+subtitle: "Deformities_Replication_2"
 author: "Vignesh"
 date: "5/25/2022"
 editor_options: 
@@ -8,18 +8,19 @@ editor_options:
 output: pdf_document
 ---
 
+
 ```{r load-packages}
 library(tidyverse)
 library(broom)
 ```
 
 ```{r data_cleaning_deformities, eval = FALSE}
-Deformities_ForR_Replication_1 <- subset(Deformities_ForR_Replication_1, `Total Number` != 0)
+Deformities_ForR_Replication_2 <- subset(Deformities_ForR_Replication_2, `Total Number` != 0)
 ```
 
 ```{r deformed-variable, eval = FALSE}
-Deformities_ForR_Replication_1 %>%
-  mutate(Deformities_ForR_Replication_1,
+Deformities_ForR_Replication_2 %>%
+  mutate(Deformities_ForR_Replication_2,
          deformed = `Total Number` - `Number Normal`, 
          percentage_deformed = deformed / `Total Number`) %>%
   ggplot(aes(x = Glyphosate, y = percentage_deformed)) +
@@ -29,18 +30,18 @@ Deformities_ForR_Replication_1 %>%
 ```
 
 ```{r getting_numerical_outputs_model_deformities, eval = FALSE}
-Deformities_ForR_Replication_1_New  <- Deformities_ForR_Replication_1 %>%
-  mutate(Deformities_ForR_Replication_1,
+Deformities_ForR_Replication_2_New  <- Deformities_ForR_Replication_2 %>%
+  mutate(Deformities_ForR_Replication_2,
          deformed = `Total Number` - `Number Normal`, 
          percentage_deformed = deformed / `Total Number`) 
-model_replicate_1_deformities <- lm(percentage_deformed ~ Glyphosate, data = Deformities_ForR_Replication_1_New)
-tidy(model_replicate_1_deformities)
+model_replicate_2_deformities <- lm(percentage_deformed ~ Glyphosate, data = Deformities_ForR_Replication_2_New)
+tidy(model_replicate_2_deformities)
 ```
 
-$$ {\widehat{Replicate1Deformities}} = 0.0956 + 0.00360~Glyphosate$$
+$$ {\widehat{Replicate2Deformities}} = 0.110 + 0.0147~Glyphosate$$
 
 ```{r bar-plots_with_data_deformities, eval = FALSE}
-Deformities_ForR_Replication_1_New %>%
+Deformities_ForR_Replication_2_New %>%
   group_by(`Sample Type`) %>%
   summarize(mean_percentage_deformed = mean(percentage_deformed), sd = sd(percentage_deformed)) %>% 
   ggplot(aes(x = `Sample Type`, y = mean_percentage_deformed)) +
@@ -49,7 +50,7 @@ Deformities_ForR_Replication_1_New %>%
 ```
 
 ```{r violin-plots_with_data_deformities, eval=FALSE}
-Deformities_ForR_Replication_1_New %>%
+Deformities_ForR_Replication_2_New %>%
   group_by(`Sample Type`) %>%
   summarize(mean_percentage_deformed = mean(percentage_deformed), sd = sd(percentage_deformed)) %>% 
   ggplot(aes(x = `Sample Type`, y = mean_percentage_deformed)) +
@@ -58,7 +59,7 @@ Deformities_ForR_Replication_1_New %>%
 ```
 
 ```{r try_something_new, eval = FALSE}
-ggplot(data = Deformities_ForR_Replication_1_New, mapping = aes(x = Glyphosate, y = percentage_deformed)) +
+ggplot(data = Deformities_ForR_Replication_2_New, mapping = aes(x = Glyphosate, y = percentage_deformed)) +
  geom_point() +
  facet_wrap(~ `Sample ID`)
 ```
