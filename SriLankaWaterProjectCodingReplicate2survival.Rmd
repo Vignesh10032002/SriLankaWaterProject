@@ -23,7 +23,7 @@ Fish_Data_ForR_ExcelModified_Replicate2 %>%
   mutate(Fish_Data_ForR_ExcelModified_Replicate2, percentagesurvival = `96_surv` / Initial_total) %>%
   ggplot(aes(x = Glyphosate, y = percentagesurvival)) +
   geom_point() +
-  geom_smooth(method=lm, se=FALSE) +
+  geom_smooth(method=lm, se=TRUE) +
   labs (x = "Glyphosate concentration", y = "Percentage Survival") 
 ```
 
