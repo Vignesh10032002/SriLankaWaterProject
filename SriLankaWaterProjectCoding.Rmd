@@ -14,7 +14,11 @@ library(tidyverse)
 library(broom)
 ```
 
-```{r mutating-variable}
+```{r data_cleaning, eval = FALSE}
+Fish_Data_ForR_Excel_Modified_Replicate1 <- subset(Fish_Data_ForR_Excel_Modified_Replicate1,`48_surv`!= 0)
+```
+
+```{r mutating-variable, eval = FALSE}
 Fish_Data_ForR_Excel_Modified_Replicate1 %>%
   mutate(Fish_Data_ForR_Excel_Modified_Replicate1, percentagesurvival = `96_surv` / Initial_total) %>%
   ggplot(aes(x = Glyphosate, y = percentagesurvival)) +
@@ -23,7 +27,7 @@ Fish_Data_ForR_Excel_Modified_Replicate1 %>%
   labs (x = "Glyphosate concentration", y = "Percentage Survival") 
 ```
 
-```{r getting_numerical_outputs}
+```{r getting_numerical_outputs_model, eval = FALSE}
 Fish_Data_ForR_Excel_Modified_Replicate2 <- Fish_Data_ForR_Excel_Modified_Replicate1 %>%
   mutate(percentagesurvival = `96_surv` / Initial_total)
 model_replicate_1_survival <- lm(percentagesurvival ~ Glyphosate, data = Fish_Data_ForR_Excel_Modified_Replicate2)
@@ -31,3 +35,12 @@ tidy(model_replicate_1_survival)
 ```
 
 $$ {\widehat{Replicate1Survival}} = 0.969 - 0.00647~Glyphosate$$
+
+```{r bar-plots_with_data, eval = FALSE}
+Fish_Data_ForR_Excel_Modified_Replicate1 %>%
+  group_by(`Sample Type`) %>%
+  summarize(mean_percentage_survival = mean(percentagesurvival), sd = sd(percentagesurvival)) %>% 
+  ggplot(aes(x = `Sample Type`, y = mean_percentage_survival)) +
+  geom_bar(stat = "identity") +
+  geom_errorbar(aes(ymin=mean_percentage_survival-sd, ymax=mean_percentage_survival+sd))
+```
