@@ -39,8 +39,8 @@ $$ {\widehat{Replicate1Survival}} = 0.969 - 0.00647~Glyphosate$$
 ```{r bar-plots_with_data, eval = FALSE}
 Fish_Data_ForR_Excel_Modified_Replicate1 %>%
   group_by(`Sample Type`) %>%
-  summarize(mean_percentage_survival = mean(percentagesurvival), sd = sd(percentagesurvival)) %>% 
+  summarize(mean_percentage_survival = mean(percentagesurvival), se = sd(percentagesurvival)/sqrt(39)) %>% 
   ggplot(aes(x = `Sample Type`, y = mean_percentage_survival)) +
   geom_bar(stat = "identity") +
-  geom_errorbar(aes(ymin=mean_percentage_survival-sd, ymax=mean_percentage_survival+sd))
+  geom_errorbar(aes(ymin=mean_percentage_survival-se, ymax=mean_percentage_survival+se))
 ```

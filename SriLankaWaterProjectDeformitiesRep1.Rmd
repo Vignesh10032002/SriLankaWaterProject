@@ -42,16 +42,16 @@ $$ {\widehat{Replicate1Deformities}} = 0.0956 + 0.00360~Glyphosate$$
 ```{r bar-plots_with_data_deformities, eval = FALSE}
 Deformities_ForR_Replication_1_New %>%
   group_by(`Sample Type`) %>%
-  summarize(mean_percentage_deformed = mean(percentage_deformed), sd = sd(percentage_deformed)) %>% 
+  summarize(mean_percentage_deformed = mean(percentage_deformed), se = sd(percentage_deformed)/ sqrt(39)) %>% 
   ggplot(aes(x = `Sample Type`, y = mean_percentage_deformed)) +
   geom_bar(stat = "identity") +
-  geom_errorbar(aes(ymin=mean_percentage_deformed - sd, ymax=mean_percentage_deformed + sd))
+  geom_errorbar(aes(ymin=mean_percentage_deformed - se, ymax=mean_percentage_deformed + se))
 ```
 
 ```{r violin-plots_with_data_deformities, eval=FALSE}
 Deformities_ForR_Replication_1_New %>%
   group_by(`Sample Type`) %>%
-  summarize(mean_percentage_deformed = mean(percentage_deformed), sd = sd(percentage_deformed)) %>% 
+  summarize(mean_percentage_deformed = mean(percentage_deformed), se = sd(percentage_deformed)/ sqrt(39)) %>% 
   ggplot(aes(x = `Sample Type`, y = mean_percentage_deformed)) +
   geom_violin()       
 #doesn't work as data points insufficient (https://stackoverflow.com/questions/60549030/geom-violin-using-the-weight-aesthetic-unexpectedly-drop-levels)
